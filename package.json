@@ -6,8 +6,8 @@
     "private": true,
     "license": "MIT",
     "scripts": {
-        "build": "webpack --progress",
-        "start": "webpack-dev-server --progress --colors"
+        "build": "webpack --env.NODE_ENV=production --progress",
+        "start": "webpack-dev-server --env.NODE_ENV=development --progress --colors"
     },
     "dependencies": {
         "@babel/polyfill": "7.4.3",

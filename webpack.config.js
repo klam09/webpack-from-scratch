@@ -4,7 +4,9 @@ const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports = () => {
+module.exports = (env) => {
+    const isProd = env.NODE_ENV === 'production';
+
     return {
         context: path.resolve(__dirname, './src'),
         devServer: {
@@ -23,7 +25,7 @@ module.exports = () => {
             path.resolve(__dirname, './src/index.js'),
             path.resolve(__dirname, './src/index.css'),
         ],
-        mode: 'development',
+        mode: isProd ? 'production' : 'development',
         module: {
             rules: [{
                 test: /\.js$/,
