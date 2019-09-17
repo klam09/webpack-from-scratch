@@ -23,7 +23,7 @@ module.exports = (env) => {
         },
         entry: [
             path.resolve(__dirname, './src/index.js'),
-            path.resolve(__dirname, './src/index.css'),
+            path.resolve(__dirname, './src/index.scss'),
         ],
         mode: isProd ? 'production' : 'development',
         module: {
@@ -34,11 +34,12 @@ module.exports = (env) => {
                     loader: 'babel-loader',
                 },
             }, {
-                test: /\.css$/,
+                test: /\.s?css$/,
                 exclude: /node_modules/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
+                    'sass-loader'
                 ],
             }, {
                 test: /\.(gif|jpe?g|png|svg)$/,
