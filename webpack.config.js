@@ -2,6 +2,8 @@ const path = require('path');
 
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = (env) => {
@@ -71,6 +73,42 @@ module.exports = (env) => {
                 test: /\.html$/,
                 use: 'html-loader',
             }],
+        },
+        optimization: {
+            minimize: isProd,
+            minimizer: [
+                new TerserPlugin({
+                    terserOptions: {
+                        parse: {
+                            ecma: 8,
+                        },
+                        compress: {
+                            ecma: 5,
+                            warnings: false,
+                            comparisons: false,
+                            inline: 2,
+                            drop_console: isProd, // or pure_funcs: ['console.log', 'console.info']
+                        },
+                        mangle: {
+                            safari10: true,
+                        },
+                        output: {
+                            ecma: 5,
+                            comments: false,
+                            ascii_only: true,
+                        },
+                    },
+                    parallel: true,
+                    cache: true,
+                    sourceMap: !isProd,
+                }),
+                new OptimizeCssAssetsPlugin({
+                    cssProcessorOptions: {
+                        reduceTransforms: false,
+                        reduceIdents: false,
+                    },
+                }),
+            ],
         },
         output: {
             path: path.resolve(__dirname, './dist'),
