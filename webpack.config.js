@@ -1,5 +1,6 @@
 const path = require('path');
 
+const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -124,6 +125,9 @@ module.exports = (env) => {
                 template: path.resolve(__dirname, './src/index.html'),
                 filename: 'index.html',
                 xhtml: true,
+            }),
+            new webpack.DefinePlugin({
+                IS_PROD: isProd
             }),
         ],
         resolve: {
