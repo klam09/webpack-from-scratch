@@ -1,6 +1,6 @@
 {
-    "name": "tutorial-webpack-basic",
-    "description": "Webpack template using pug to render html files",
+    "name": "webpack-from-scratch",
+    "description": "Webpack configuration from scratch",
     "version": "1.0.0",
     "author": "Green Tomato Ltd.",
     "private": true,
